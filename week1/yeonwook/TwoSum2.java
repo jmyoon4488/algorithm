@@ -8,16 +8,16 @@ public class TwoSum {
 	}
 	
 	
-    public static int[] twoSum(int[] nums, int target) {
+    public int[] twoSum(int[] numbers, int target) {
         
         int[] resultSets = new int[2];
         
-        for(int i=0; i<nums.length; i++) {
+        for(int i=0; i<numbers.length; i++) {
             
-            for(int j=0; j<nums.length; j++) {
-                if(i!=j && nums[i]+nums[j]==target) {
-                    resultSets[0] = i;
-                    resultSets[1] = j;
+            for(int j=i+1; j<numbers.length; j++) {
+                if(numbers[i]+numbers[j]==target) {
+                    resultSets[0] = i+1;
+                    resultSets[1] = j+1;
                     
                     break;
                 }
