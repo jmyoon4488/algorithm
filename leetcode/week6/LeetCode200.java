@@ -34,16 +34,44 @@ public class LeetCode200 {
     }
 
     static class Solution {
+        int[] moveUpDown = new int[]{-1,1,0,0};
+        int[] moveLeftRight = new int[]{0,0,-1,1};
+
         public int numIslands(char[][] grid) {
+            if (grid.length == 0) return 0;
+            if (grid[0].length == 0) return 0;
 
+            int sumCount = 0;
+            int rowSize = grid.length;
+            int colSize = grid[0].length;
 
-
-            for (char[] clist : grid) {
-                for (char c : clist) {
-                    System.out.println(c);
+            for (int i = 0; i < rowSize; i++) {
+                for (int j = 0; j < colSize; j++) {
+                    if (grid[i][j] == '0') continue;
+                    searchMap(grid, i, j);
+                    sumCount++;
                 }
             }
-            return 0;
+
+            return sumCount;
+        }
+
+        public void searchMap(char[][] map, int row, int col) {
+            map[row][col] = '0';
+            for (int i = 0; i < 4; i++) {
+                int moveRow = row + moveUpDown[i];
+                int moveCol = col + moveLeftRight[i];
+                if (!isValid(map, moveRow, moveCol)) continue;
+                if (map[moveRow][moveCol] == '0') continue;
+                searchMap(map, moveRow, moveCol);
+            }
+        }
+
+        public boolean isValid(char[][] map, int row, int col) {
+            if (0 <= row && row < map.length
+                    && 0 <= col && col < map[0].length
+                    && map[row][col] == '1') return true;
+            return false;
         }
     }
 
